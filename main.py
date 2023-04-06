@@ -6,7 +6,7 @@ class Game:
     def __init__(self):
         pg.init()
         self.screen = pg.display.set_mode(RES)
-        self.clock = pg.time.clock()
+        self.clock = pg.time.Clock()
 
     def new_game(self):
         pass
@@ -30,3 +30,8 @@ class Game:
             self.check_events()
             self.update()
             self.draw()
+
+
+if __name__ == '__main__':
+    game = Game()
+    game.run()

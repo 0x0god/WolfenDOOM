@@ -26,7 +26,7 @@ class RayCasting:
 
             for i in range(MAX_DEPTH):
                 tile_hor = int(x_hor), int(y_hor)
-                if tile_hor in self.game.map.word_map:
+                if tile_hor in self.game.map.world_map:
                     break
                 x_hor += dx
                 y_hor += dy
@@ -43,7 +43,7 @@ class RayCasting:
 
             for i in range(MAX_DEPTH):
                 tile_vert = int(x_vert), int(y_vert)
-                if tile_vert in self.game.map.word_map:
+                if tile_vert in self.game.map.world_map:
                     break
                 x_vert += dx
                 y_vert += dy

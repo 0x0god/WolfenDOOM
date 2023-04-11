@@ -21,11 +21,20 @@ class NPC(AnimatedSprite):
                  self.alive = True
                  self.pain = False
                  self.ray_cast_value = False
+                 self.frame_counter = 0
 
     def update(self):
         self.check_animation_time()
         self.get_sprite()
         self.run_logic()
+        # self.draw_ray_cast()
+
+    def animate_death(self):
+        if not self.alive:
+            if self.animation_trigger and self.frame_counter < len(self.death_images) - 1:
+                self.death_images.rotate(-1)
+                self.image = self.death_images[0]
+                self.frame_counter += 1
 
     def animate_pain(self):
         self.animate(self.pain_images)
@@ -33,19 +42,29 @@ class NPC(AnimatedSprite):
             self.pain = False
 
     def check_hit_in_npc(self):
-        if self.game.player.shot:
+        if self.ray_cast_value and self.game.player.shot:
             if HALF_WIDTH - self.sprite_half_width < self.screen_x < HALF_WIDTH + self.sprite_half_width:
                 self.game.sound.npc_pain.play()
                 self.game.player.shot = False
                 self.pain = True
+                self.health -= self.game.weapon.damage
+                self.check_health()
+
+    def check_health(self):
+        if self.health < 1:
+            self.alive = False
+            self.game.sound.npc_death.play()
 
     def run_logic(self):
         if self.alive:
+            self.ray_cast_value = self.ray_cast_player_npc()
             self.check_hit_in_npc()
             if self.pain:
                 self.animate_pain()
             else:
                 self.animate(self.idle_images)
+        else:
+            self.animate_death()
 
     @property
     def map_pos(self):
@@ -115,4 +134,8 @@ class NPC(AnimatedSprite):
             return True
         return False
 
-        
+    def draw_ray_cast(self):
+        pg.draw.circle(self.game.screen, 'red', (100 * self.x, 100 * self.y), 15)
+        if self.ray_cast_player_npc():
+            pg.draw.line(self.game.screen, 'orange', (100 * self.game.player.x, 100 * self.game.player.y),
+                          (100 * self.x, 100 * self.y), 2)

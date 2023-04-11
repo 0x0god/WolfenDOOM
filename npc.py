@@ -22,12 +22,22 @@ class NPC(AnimatedSprite):
                  self.pain = False
                  self.ray_cast_value = False
                  self.frame_counter = 0
+                 self.player_search_trigger = False
 
     def update(self):
         self.check_animation_time()
         self.get_sprite()
         self.run_logic()
         # self.draw_ray_cast()
+
+    def check_wall(self, x, y):
+        return (x, y) not in self.game.map.world_map
+
+    def check_wall_collision(self, dx, dy):
+        if self.check_wall(int(self.x + dx * self.size), int(self.y)):
+            self.x += dx
+        if self.check_wall(int(self.x), int(self.y + dy * self.size)):
+            self.y += dy
 
     def movement(self):
         next_pos = self.game.player.map_pos
@@ -67,8 +77,19 @@ class NPC(AnimatedSprite):
         if self.alive:
             self.ray_cast_value = self.ray_cast_player_npc()
             self.check_hit_in_npc()
+
             if self.pain:
                 self.animate_pain()
+            
+            elif self.ray_cast_value:
+                self.player_search_trigger = True
+                self.animate(self.walk_images)
+                self.movement()
+
+            elif self.player_search_trigger:
+                self.animate(self.walk_images)
+                self.movement()
+            
             else:
                 self.animate(self.idle_images)
         else:

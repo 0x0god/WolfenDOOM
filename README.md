@@ -1,4 +1,8 @@
 # WolfenDOOM
 Wolfenstein 3D shooter game impacted by the Wolfenstein which was the first widely successful 3D computer game ever released.
 
-[Sprite Database](https://spritedatabase.net/)
+## How To Run The Game
+- Navigate to the game folder
+- Then run `python main.py`
+
+[View DEMO HERE](https://spritedatabase.net/)

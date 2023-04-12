@@ -5,4 +5,4 @@ Wolfenstein 3D shooter game inspired by the Wolfenstein 3D PlayStation game.
 - Navigate to the game folder
 - Then run `python main.py`
 
-[VIEW DEMO HERE](https://spritedatabase.net/)
+[VIEW DEMO HERE](https://vimeo.com/816905985)

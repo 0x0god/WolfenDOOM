@@ -1,5 +1,5 @@
 # WolfenDOOM
-Wolfenstein 3D shooter game impacted by the Wolfenstein which was the first widely successful 3D computer game ever released.
+Wolfenstein 3D shooter game inspired by the Wolfenstein 3D PlayStation game.
 
 ## How To Run The Game
 - Navigate to the game folder

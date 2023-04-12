@@ -5,4 +5,4 @@ Wolfenstein 3D shooter game impacted by the Wolfenstein which was the first wide
 - Navigate to the game folder
 - Then run `python main.py`
 
-[View DEMO HERE](https://spritedatabase.net/)
+[VIEW DEMO HERE](https://spritedatabase.net/)
